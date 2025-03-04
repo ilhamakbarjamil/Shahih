@@ -1,5 +1,5 @@
 # 1. Siapkan virtual machine/PC dan masuk sebagai user praktikum2025
-getent passwd praktikum2025 || sudo useradd -m praktikum2025
+id
 
 # 2. Pindah ke user root menggunakan sudo
 sudo -i
@@ -7,7 +7,6 @@ sudo -i
 # 3. Buat user baru bernama student dan pastikan home directory terbuat
 sudo useradd -m student
 getent passwd student
-ls -ld /home/student
 
 # 4. Set password user student menjadi StUd3nT!23
 echo "StUd3nT!23" | sudo passwd --stdin student
@@ -38,7 +37,6 @@ sudo userdel -r informatic
 
 # Verifikasi
 getent passwd cloudadmin informatic
-ls -ld /home/cloudadmin /home/informatic
 
 # 8. Buat grup administration dengan GID 30000 dan temporary dengan range sistem
 sudo groupadd -g 30000 administration
@@ -52,11 +50,6 @@ getent group temporary
 sudo usermod -aG administration faculty
 sudo usermod -aG administration serveradmin
 
-# Verifikasi
-groups faculty
-groups serveradmin
-getent group administration
-
 # Aktifkan hak administratif untuk grup administration
 sudo visudo
 # Tambahkan baris berikut di dalam file visudo:
@@ -65,9 +58,6 @@ sudo visudo
 # 10. Hapus grup temporary dan ubah GID grup administration ke 22000
 sudo groupdel temporary
 sudo groupmod -g 22000 administration
-
-# Verifikasi
-getent group administration
 
 # 11. Pindah ke user faculty dan lakukan tugas
 su - faculty
